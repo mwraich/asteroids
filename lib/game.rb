@@ -21,24 +21,27 @@ class Game < Gosu::Window
     @space = CP::Space.new
 
     # DEMO - REMOVE ME
-    @image1 = Gosu::Image.new("media/ship.bmp")
-    shape1_array = [CP::Vec2.new(-20.0, -13.0), CP::Vec2.new(-20.0, 14.0), CP::Vec2.new(20.0, 1.0)]
-    @shape1 = CP::Shape::Poly.new(CP::Body.new(10.0, 150.0), shape1_array)
-    @shape1.body.p = CP::Vec2.new(WIDTH/2+100, HEIGHT/2)
-    @shape1.e = 1.0
-    @shape1.body.apply_impulse(CP::Vec2.new(-400.0, 0.0), CP::Vec2.new(0.0, 0.0))
-    @space.add_body(@shape1.body)
-    @space.add_shape(@shape1)
-
-    @image2 = Gosu::Image.new("media/ship.bmp")
-    shape2_array = [CP::Vec2.new(-20.0, -13.0), CP::Vec2.new(-20.0, 14.0), CP::Vec2.new(20.0, 1.0)]
-    @shape2 = CP::Shape::Poly.new(CP::Body.new(10.0, 150.0), shape2_array)
-    @shape2.body.p = CP::Vec2.new(WIDTH/2-100, HEIGHT/2)
-    @shape2.e = 1.0
-    @shape2.body.apply_impulse(CP::Vec2.new(400.0, 0.0), CP::Vec2.new(0.0, 0.0))
-    @space.add_body(@shape2.body)
-    @space.add_shape(@shape2)
+    # @image1 = Gosu::Image.new("media/ship.bmp")
+    # shape1_array = [CP::Vec2.new(-20.0, -13.0), CP::Vec2.new(-20.0, 14.0), CP::Vec2.new(20.0, 1.0)]
+    # @shape1 = CP::Shape::Poly.new(CP::Body.new(10.0, 150.0), shape1_array)
+    # @shape1.body.p = CP::Vec2.new(WIDTH/2+100, HEIGHT/2)
+    # @shape1.e = 1.0
+    # @shape1.body.apply_impulse(CP::Vec2.new(-400.0, 0.0), CP::Vec2.new(0.0, 0.0))
+    # @space.add_body(@shape1.body)
+    # @space.add_shape(@shape1)
+    #
+    # @image2 = Gosu::Image.new("media/ship.bmp")
+    # shape2_array = [CP::Vec2.new(-20.0, -13.0), CP::Vec2.new(-20.0, 14.0), CP::Vec2.new(20.0, 1.0)]
+    # @shape2 = CP::Shape::Poly.new(CP::Body.new(10.0, 150.0), shape2_array)
+    # @shape2.body.p = CP::Vec2.new(WIDTH/2-100, HEIGHT/2)
+    # @shape2.e = 1.0
+    # @shape2.body.apply_impulse(CP::Vec2.new(400.0, 0.0), CP::Vec2.new(0.0, 0.0))
+    # @space.add_body(@shape2.body)
+    # @space.add_shape(@shape2)
     # END DEMO
+
+    @player = Player.new(@@dt)
+
   end
 
   # Gosu calls this method first - to update the model, which in this case is stored in Chipmunk
@@ -46,13 +49,28 @@ class Game < Gosu::Window
     # UPDATE THE MODEL
     # Step time forward in Chipmunk - update the model and call any collision callbacks
     @space.step(@@dt)
+    if accelerate_control_pressed?
+
+    end
+    if turn_right_control_pressed?
+
+    end
+    if turn_left_control_pressed?
+      puts 'I heard you'
+      @player.spin=()
+    end
+    if shoot_control_pressed?
+
+    end
+    if hyperspace_control_pressed?
+      @player.position=(Body.random_position)
+    end
   end
 
   def draw
-    # DEMO - REMOVE ME
-    @image1.draw(@shape1.body.p.x, @shape1.body.p.y, ZOrder::Player)
-    @image2.draw(@shape2.body.p.x, @shape2.body.p.y, ZOrder::Player)
-    # END DEMO
+    # @image1.draw(@shape1.body.p.x, @shape1.body.p.y, ZOrder::Player)
+    # @image2.draw(@shape2.body.p.x, @shape2.body.p.y, ZOrder::Player)
+    @player.draw()
   end
 
   def button_down(id)
@@ -61,19 +79,19 @@ class Game < Gosu::Window
 
 private
   # CONTROLS
-  def accelerate_control_pressed
+  def accelerate_control_pressed?
     Gosu::button_down?(Gosu::KbUp)
   end
-  def turn_right_control_pressed
+  def turn_right_control_pressed?
     Gosu::button_down?(Gosu::KbRight)
   end
-  def turn_left_control_pressed
+  def turn_left_control_pressed?
     Gosu::button_down?(Gosu::KbLeft)
   end
-  def shoot_control_pressed
+  def shoot_control_pressed?
     Gosu::button_down?(Gosu::KbSpace)
   end
-  def hyperspace_control_pressed
+  def hyperspace_control_pressed?
     Gosu::button_down?(Gosu::KbLeftShift) || Gosu::button_down?(Gosu::KbRightShift)
   end
 end

@@ -13,13 +13,13 @@ class Player < Body
   def initialize(dt)
     super default_shape
     @dt = dt
-    #create a new_ship
+    new_ship
   end
 
   def new_ship
-    #self.position = dead_center
-    #self.velocity = still
-    #self.angle = facing_upward
+    self.position = dead_center
+    self.velocity = still
+    self.angle = facing_upward
   end
 
   def apply_damping
@@ -31,6 +31,7 @@ class Player < Body
   end
 
   def turn
+    
   end
 
   def shoot
@@ -50,7 +51,7 @@ class Player < Body
 
   def draw
     white = 0xff_ffffff
-    @ship_image.draw_rot(position.x, position.y, ZOrder::Player, angle.radians_to_gosu, 0.5, 0.5, 1, 1, white)
+    @@ship_image.draw_rot(position.x, position.y, ZOrder::Player, angle.radians_to_gosu, 0.5, 0.5, 1, 1, white)
   end
 
 private

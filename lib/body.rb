@@ -63,7 +63,7 @@ class Body
 
 protected
   # "zero" position
-  def dead_center 
+  def dead_center
     CP::Vec2.new(WIDTH/2, HEIGHT/2)
   end
 
