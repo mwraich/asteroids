@@ -52,13 +52,9 @@ class Game < Gosu::Window
     if accelerate_control_pressed?
 
     end
-    if turn_right_control_pressed?
 
-    end
-    if turn_left_control_pressed?
-      puts 'I heard you'
-      @player.spin=()
-    end
+    @player.turn(turn_left_control_pressed?, turn_right_control_pressed?)
+
     if shoot_control_pressed?
 
     end

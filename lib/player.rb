@@ -30,8 +30,13 @@ class Player < Body
     #self.position = position
   end
 
-  def turn
-    
+  def turn(left, right)
+    return if left && right
+    if left
+      self.spin=(50)
+    elsif
+      self.spin=(200)
+    end
   end
 
   def shoot
