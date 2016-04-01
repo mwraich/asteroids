@@ -51,7 +51,9 @@ class Game < Gosu::Window
     # Step time forward in Chipmunk - update the model and call any collision callbacks
     @space.step(@@dt)
     if accelerate_control_pressed?
-
+      @player.accelerate
+    else
+      @player.reset_forces
     end
 
     @player.turn(turn_left_control_pressed?, turn_right_control_pressed?)

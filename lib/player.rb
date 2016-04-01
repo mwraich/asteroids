@@ -35,7 +35,7 @@ class Player < Body
       self.spin = 0.0
     elsif right
       self.spin=(6.0)
-    else 
+    else
       self.spin=(-6.0)
     end
   end
@@ -53,6 +53,10 @@ class Player < Body
   def accelerate(force = 2000.0)
     @shape.body.reset_forces # When a force or torque is set on a body, it is cumulative - start from zero
     @shape.body.apply_force((self.class.radians_to_vec2(angle) * force), zero_offset)
+  end
+
+  def reset_forces
+    @shape.body.reset_forces
   end
 
   def draw
