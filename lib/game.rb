@@ -41,6 +41,7 @@ class Game < Gosu::Window
     # END DEMO
 
     @player = Player.new(@@dt)
+    @player.add_to_space(@space)
 
   end
 
@@ -66,7 +67,7 @@ class Game < Gosu::Window
   def draw
     # @image1.draw(@shape1.body.p.x, @shape1.body.p.y, ZOrder::Player)
     # @image2.draw(@shape2.body.p.x, @shape2.body.p.y, ZOrder::Player)
-    @player.draw()
+    @player.draw
   end
 
   def button_down(id)

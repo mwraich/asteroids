@@ -31,11 +31,12 @@ class Player < Body
   end
 
   def turn(left, right)
-    return if left && right
-    if left
-      self.spin=(50)
-    elsif
-      self.spin=(200)
+    if left == right
+      self.spin = 0.0
+    elsif right
+      self.spin=(6.0)
+    else 
+      self.spin=(-6.0)
     end
   end
 
